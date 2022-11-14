@@ -1,3 +1,5 @@
+// VARIABLES
+
 // SIDEBAR
 const navShow = document.querySelector('header')
 const navToggle = document.querySelector('header nav h1')

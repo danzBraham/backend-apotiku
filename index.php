@@ -28,12 +28,12 @@ if (isset($_POST['login'])) {
 <body>
   <!-- Login Page -->
   <section class="wrapper">
-    <?php if (isset($login['error'])) : ?>
+  <?php if (isset($login['error'])) : ?>
+    <div class="pop-msg">
       <!--Ini Pop Up kalo Salah Username atau Password-->
-      <div class="pop-msg">
-        <p>Username atau Password Salah</p>
-        <a href="">Oke</a>
-      </div>
+      <p>Username atau Password Salah</p>
+      <a href="">Oke</a>
+    </div>
     <?php endif; ?>
     <section class="login-page">
       <div class="input-container">
@@ -44,18 +44,19 @@ if (isset($_POST['login'])) {
             <label for="username">Username</label>
             <div class="content">
               <i class="fa-solid fa-user"></i>
-              <input autocomplete="off" type="text" name="username" id="username">
+              <input autocomplete="off" type="text" name="username">
             </div>
           </div>
           <div class="input-box">
             <label for="password">Password</label>
             <div class="content">
               <i class="fa-solid fa-lock"></i>
-              <input autocomplete="off" type="password" name="password" id="password">
+              <input autocomplete="off" type="password" name="password">
             </div>
           </div>
           <button type="submit" name="login">Login</button>
         </form>
+        <p>Anda belum punya Akun? <a href="register.html">Daftar di sini</a></p>
       </div>
 
       <div class="img-container"></div>

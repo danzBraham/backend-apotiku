@@ -66,7 +66,7 @@ header nav {
   justify-content: center;
   margin: 0 auto;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
 }
 
 header nav .logo {
@@ -132,8 +132,7 @@ header.slide {
   border-radius: 10px;
   position: absolute;
   top: 30px;
-  /* display: flex; */
-  display: none;
+  display: flex;
   gap: 20px;
   flex-direction: column;
   align-items: center;
@@ -767,6 +766,9 @@ h2 {
 }
 
 .table-page .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   visibility: hidden;
   opacity: 0;
   position: absolute;
@@ -784,18 +786,22 @@ h2 {
   visibility: visible;
   opacity: 1;
 }
+.table-page .overlay.update {
+  visibility: visible;
+  opacity: 1;
+}
 
 .table-page .tambah-popup {
   visibility: hidden;
   opacity: 0;
-  max-width: 500px;
+  width: 40%;
   position: absolute;
   z-index: 500;
-  top: 2px;
-  left: 0;
+  /* top: 2px; */
+  /* left: 0;
   right: 0;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
   background: var(--box-color);
   padding: 25px;
   border-radius: 10px;
@@ -806,6 +812,11 @@ h2 {
   transition: 300ms ease;
 }
 .table-page .tambah-popup.tambah {
+  visibility: visible;
+  opacity: 1;
+}
+
+.table-page .tambah-popup.update {
   visibility: visible;
   opacity: 1;
 }
@@ -927,11 +938,101 @@ textarea {
   transition: 100ms ease-in-out;
   font-weight: 500;
 }
+
 .table-page .table table tbody .btn button:hover {
   opacity: 0.9;
 }
-.table-page .table table tbody .btn button[type="submit"]{
+
+.table-page .table table tbody .btn .update{
   background-color: var(--main-color);
+}
+
+/* Detail Transaksi Page */
+.back-btn{
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: var(--light-text);
+  font-weight: bold;
+  background-color: var(--main-color);
+  padding: 20px;
+  border-bottom-right-radius: 50%;
+}
+
+.tittle-detail{
+  color: var(--light-text);
+  text-align: center;
+  margin: 20px 0;
+  font-size: 24px;
+}
+
+.content-detail{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 200px;
+}
+
+.content-detail .data-nota{
+  display: grid;
+  grid-template-columns: .5fr 1fr;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--box-color);
+}
+
+.content-detail .data-nota p{
+  padding: 10px;
+  border: 1px solid var(--box-color);
+  background-color: #cac9c9;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.content-detail .data-nota .head{
+  background-color: var(--main-color);
+}
+
+.content-detail .data-transaksi{
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--box-color);
+}
+
+.content-detail .data-transaksi thead{
+  background-color: var(--main-color);
+}
+
+.content-detail .data-transaksi tbody{
+  background-color: #cac9c9;
+}
+
+.content-detail .data-transaksi td{
+  padding: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.content-detail .btn{
+  align-self: center;
+  display: flex;
+  gap: 20px;
+}
+
+.content-detail .btn button{
+  cursor: pointer;
+  border: none;
+  padding: 5px 20px;
+  border-radius: 5px;
+  color: var(--light-text);
+  background-color: #3f3f3f;
+  transition: 100ms all;
+}
+.content-detail .btn #lihatTrans{
+  background-color: var(--main-color);
+}
+.content-detail .btn button:hover{
+  opacity: .8;
 }
 
 /*========= RESPONSIVE =========*/

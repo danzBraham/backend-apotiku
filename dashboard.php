@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'functions.php';
+require './functions.php';
 
 if (!isset($_SESSION['login'])) {
   header("Location: ./index.php");
@@ -17,7 +17,6 @@ if (!isset($_SESSION['login'])) {
   <title>Apotiku</title>
   <!-- Link CSS -->
   <link rel="stylesheet" href="CSS/style.php">
-  <link rel="stylesheet" href="CSS/print.php">
   <!-- Link Fontawesome -->
   <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
   <!-- Link Unicons -->
@@ -31,11 +30,12 @@ if (!isset($_SESSION['login'])) {
       <h1 class="logo"><a href="#"><i class="uil uil-apps"></i></a></h1>
       <li><a href=""><i class="fa-solid fa-home"></i> <span>Home</span> </a></li>
       <?php if (@$_SESSION['level'] === 'admin') : ?>
-        <li><a href="obat/obatView.php"><i class="fa-solid fa-briefcase-medical"></i></i> <span>Table Obat</span> </a></li>
-        <li><a href="datasupplier.html"><i class="fa-solid fa-truck-medical"></i> <span>Table Supplier</span> </a></li>
+        <li><a href="dataobat.html"><i class="fa-solid fa-briefcase-medical"></i></i> <span>Table Obat</span> </a></li>
+        <li><a href="supplier/datasupplier.php"><i class="fa-solid fa-truck-medical"></i> <span>Table Supplier</span> </a></li>
         <li><a href="datapelanggan.html"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
         <li><a href="datatransaksi.html"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
         <li><a href="datakaryawan.html"><i class="fa-solid fa-users"></i> <span>Table Karyawan</span> </a></li>
+        <li><a href="detailtransaksi.html"><i class="fa-solid fa-clipboard"></i> <span>Detail Transaksi</span> </a></li>
       <?php else : ?>
         <li><a href="datapelanggan.html"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
         <li><a href="datatransaksi.html"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
@@ -49,22 +49,21 @@ if (!isset($_SESSION['login'])) {
     <div class="shape two"></div>
     <div class="dash-tittle">
       <div class="tittle">
-        <?php $id = $_SESSION['id'] ?>
+      <?php $id = $_SESSION['id'] ?>
         <?php $dataUser = query("SELECT * FROM tb_users WHERE id = '$id'"); ?>
         <h1>Hai <span class="active"><?= $dataUser['username']; ?></span></h1>
         <h2>Selamat Datang di Dashboard <span>👋</span></h2>
       </div>
       <div class="profile">
-        <?php $username = $dataUser['username']; ?>
         <img src="Assets/profilePict/<?= $dataUser['picture']; ?>" alt="Profile">
         <a id="profileBtn"><?= $dataUser['username']; ?> <i class="fa-solid fa-arrow-down"></i></a>
       </div>
       <div id="profilePopup" class="profile-popup">
-        <a href="register.html"><i class="fa-solid fa-user-plus"></i> Tambah User</a>
+        <a href="register.php"><i class="fa-solid fa-user-plus"></i> Tambah User</a>
         <span></span>
-        <a href="datauser.html"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+        <a href="datauser.php"><i class="fa-solid fa-gear"></i> Pengaturan</a>
         <span></span>
-        <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
       </div>
     </div>
 
@@ -106,30 +105,23 @@ if (!isset($_SESSION['login'])) {
               <p>Rp24000</p>
               <button>Detail</button>
             </div>
-            <div class="data">
-              <div class="profile">
-                <img src="Assets/img/profile-client.svg">
-                <div class="name">
-                  <p>Thomas Slebew</p>
-                  <p>thomasdingin@gmail.com</p>
-                </div>
-              </div>
-              <p>Paracetamol</p>
-              <p>Rp24000</p>
-              <button>Detail</button>
-            </div>
+            <!-- <div class="data">
+                            <div class="profile">
+                                <img src="Assets/img/profile-client.svg">
+                                <div class="name">
+                                    <p>Thomas Slebew</p>
+                                    <p>thomasdingin@gmail.com</p>
+                                </div>
+                            </div>
+                            <p>Paracetamol</p>
+                            <p>Rp24000</p>
+                            <button>Detail</button>
+                        </div> -->
           </div>
         </section>
 
         <section class="data-karyawan">
           <h3>Data Karyawan</h3>
-          <div class="karyawan">
-            <img src="Assets/img/profile-karyawan.svg">
-            <div class="name">
-              <p>Thomas Slebew</p>
-              <p>thomasdingin@gmail.com</p>
-            </div>
-          </div>
           <div class="karyawan">
             <img src="Assets/img/profile-karyawan.svg">
             <div class="name">

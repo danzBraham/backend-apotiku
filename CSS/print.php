@@ -1,6 +1,4 @@
-<?php 
-header('Content-type: text/css');
-?>
+<?php header('Content-type: text/css'); ?>
 @media print {
   .print {
     display: none !important;
