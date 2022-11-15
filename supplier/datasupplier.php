@@ -19,10 +19,29 @@ if (isset($_POST['add'])) {
   if (insert($_POST) > 0) {
     echo "<script>
             alert('Berhasil Menambah Supplier!');
+            document.location.href = 'datasupplier.php';
           </script>";
   } else {
     echo "<script>
             alert('Gagal Menambah Supplier!');
+          </script>";
+  }
+}
+
+if ($_GET != null) {
+  $id = $_GET['idsupplier'];
+  $dataSuppUp = query("SELECT * FROM tb_supplier WHERE idsupplier = $id") [0];
+}
+
+if (isset($_POST['update'])) {
+  if (update($_POST) > 0) {
+    echo "<script>
+            alert('Data Berhasil Diupdate!');
+            document.location.href = 'datasupplier.php';
+          </script>";
+} else {
+    echo "<script>
+            alert('Data Gagal Diupdate!');
           </script>";
   }
 }
@@ -77,9 +96,9 @@ if (isset($_POST['add'])) {
     </div>
 
     <div id="overlay" class="overlay">
-      <div id="tambahPopup" class="tambah-popup">
+      <div id="tambahPopup" class="form-popup">
         <h3>Insert Supplier</h3>
-        <form action="" method="POST">
+        <form action="" method="POST" autocomplete="off">
           <div class="input-box">
             <label for="namaSupplier">Nama Supplier</label>
             <input type="text" name="perusahaan" id="namaSupplier">
@@ -102,35 +121,30 @@ if (isset($_POST['add'])) {
           </div>
         </form>
       </div>
-    </div>
 
-    <div id="overlay" class="overlay">
-      <div id="updatePopup" class="tambah-popup">
+      <div id="updatePopup" class="form-popup">
         <h3>Update Supplier</h3>
-        <form action="">
+        <form action="" method="POST">
+          <input type="hidden" name="idsupplier" value="<?= $dataSuppUp['idsupplier']; ?>">
           <div class="input-box">
             <label for="namaSupplier">Nama Supplier</label>
-            <select name="" id="namaSupplier">
-              <option value="xianjing">PT. Xianjing</option>
-              <option value="shelby">PT. Shelby</option>
-              <option value="sumaradu">PT. Sumaradu</option>
-            </select>
+            <input type="text" name="perusahaan" id="namaSupplier" value="<?= $dataSuppUp['perusahaan']; ?>">
           </div>
           <div class="input-box">
             <label for="noTelp">No Telp</label>
-            <input type="text" name="" id="noTelp">
+            <input type="tel" name="telp" id="noTelp" value="<?= $dataSuppUp['telp']; ?>">
           </div>
           <div class="input-box">
-            <label for="hargaJual">Alamat</label>
-            <input type="text" name="" id="hargaJual">
+            <label for="alamat">Alamat</label>
+            <input type="text" name="alamat" id="almaat" value="<?= $dataSuppUp['alamat']; ?>">
           </div>
           <div class="input-box">
             <label for="ketObat">Keterangan</label>
-            <textarea name="" id="ketObat" rows=""></textarea>
+            <textarea name="ket" id="ketObat"><?= $dataSuppUp['keterangan']; ?></textarea>
           </div>
           <div class="btn">
-            <button id="close" type="reset">Cancel</button>
-            <button id="close" type="submit">Submit</button>
+            <button id="closeUpdate" type="reset">Cancel</button>
+            <button id="closeUpdate" type="submit" name="update">Submit</button>
           </div>
         </form>
       </div>
@@ -159,7 +173,7 @@ if (isset($_POST['add'])) {
             <td><?= $supp['keterangan']; ?></td>
             <td class="btn">
               <a href="suppDelete.php?idsupplier=<?= $supp['idsupplier']; ?>"><button id="del">Hapus</button></a>
-              <button class="update">Update</button>
+              <a href="datasupplier.php?idsupplier=<?= $supp['idsupplier']; ?>"><button class="update">Update</button></a>
             </td>
           </tbody>
         <?php endforeach; ?>
@@ -170,6 +184,7 @@ if (isset($_POST['add'])) {
 
   <script src="../JS/table.js"></script>
   <script>
+    // Ajax Search
     const key = document.querySelector('#keyword');
     const table = document.querySelector('.table');
 
