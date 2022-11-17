@@ -30,15 +30,14 @@ if (!isset($_SESSION['login'])) {
       <h1 class="logo"><a href="#"><i class="uil uil-apps"></i></a></h1>
       <li><a href=""><i class="fa-solid fa-home"></i> <span>Home</span> </a></li>
       <?php if (@$_SESSION['level'] === 'admin') : ?>
-        <li><a href="dataobat.html"><i class="fa-solid fa-briefcase-medical"></i></i> <span>Table Obat</span> </a></li>
+        <li><a href="obat/dataobat.php"><i class="fa-solid fa-briefcase-medical"></i></i> <span>Table Obat</span> </a></li>
         <li><a href="supplier/datasupplier.php"><i class="fa-solid fa-truck-medical"></i> <span>Table Supplier</span> </a></li>
-        <li><a href="datapelanggan.html"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
-        <li><a href="datatransaksi.html"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
-        <li><a href="datakaryawan.html"><i class="fa-solid fa-users"></i> <span>Table Karyawan</span> </a></li>
-        <li><a href="detailtransaksi.html"><i class="fa-solid fa-clipboard"></i> <span>Detail Transaksi</span> </a></li>
+        <li><a href="pelanggan/datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
+        <li><a href="transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
+        <li><a href="karyawan/datakaryawan.php"><i class="fa-solid fa-users"></i> <span>Table Karyawan</span> </a></li>
       <?php else : ?>
-        <li><a href="datapelanggan.html"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
-        <li><a href="datatransaksi.html"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
+        <li><a href="pelanggan/datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
+        <li><a href="transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
       <?php endif; ?>
     </nav>
   </header>
@@ -49,7 +48,7 @@ if (!isset($_SESSION['login'])) {
     <div class="shape two"></div>
     <div class="dash-tittle">
       <div class="tittle">
-      <?php $id = $_SESSION['id'] ?>
+        <?php $id = $_SESSION['id'] ?>
         <?php $dataUser = query("SELECT * FROM tb_users WHERE id = '$id'"); ?>
         <h1>Hai <span class="active"><?= $dataUser['username']; ?></span></h1>
         <h2>Selamat Datang di Dashboard <span>👋</span></h2>
@@ -78,7 +77,7 @@ if (!isset($_SESSION['login'])) {
           </div>
           <div class="histori-tittle">
             <h3>Histori Transaksi</h3>
-            <a href="datatransaksi.html">Lebih Banyak</a>
+            <a href="transaksi/datatransaksi.php">Lebih Banyak</a>
           </div>
           <div class="histori-data">
             <div class="data">
@@ -105,19 +104,6 @@ if (!isset($_SESSION['login'])) {
               <p>Rp24000</p>
               <button>Detail</button>
             </div>
-            <!-- <div class="data">
-                            <div class="profile">
-                                <img src="Assets/img/profile-client.svg">
-                                <div class="name">
-                                    <p>Thomas Slebew</p>
-                                    <p>thomasdingin@gmail.com</p>
-                                </div>
-                            </div>
-                            <p>Paracetamol</p>
-                            <p>Rp24000</p>
-                            <button>Detail</button>
-                        </div> -->
-          </div>
         </section>
 
         <section class="data-karyawan">
@@ -138,7 +124,7 @@ if (!isset($_SESSION['login'])) {
           </div>
           <div class="btn">
             <img src="Assets/img/img-karyawan.svg">
-            <a href="datakaryawan.html">Lihat Semua</a>
+            <a href="karyawan/datakaryawan.php">Lihat Semua</a>
           </div>
         </section>
       </section>

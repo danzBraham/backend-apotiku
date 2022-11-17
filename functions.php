@@ -23,8 +23,8 @@ function query($query) {
 function queryReg($query) {
   $conn = connection();
   $result = mysqli_query($conn, $query);
-  $rows = [];
 
+  $rows = [];
   if (mysqli_num_rows($result) === 1) {
     while ($row = mysqli_fetch_assoc($result)) {
       $rows[] = $row;

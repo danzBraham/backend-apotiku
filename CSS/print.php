@@ -1,19 +1,14 @@
 <?php header('Content-type: text/css'); ?>
 @media print {
-  .print {
+  header,
+  nav,
+  .header,
+  .overlay {
     display: none !important;
   }
-
-  table, tr, td, th {
-    border-collapse: collapse;
-  }
-
-  table tr:nth-child(1) {
-    color: red;
-  }
 }
 
-@page {
+<!-- @page {
   size: auto;
   margin: 0mm;
-}
+} -->

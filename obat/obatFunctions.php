@@ -18,7 +18,7 @@ function query($query) {
 function search($keyword) {
   $conn = connection();
 
-  $query = "SELECT * FROM tb_supplier WHERE perusahaan LIKE '%$keyword%'";
+  $query = "SELECT * FROM tb_obat WHERE namaobat LIKE '%$keyword%'";
   $result = mysqli_query($conn, $query);
 
   $rows = [];
@@ -32,13 +32,16 @@ function search($keyword) {
 function insert($data) {
   $conn = connection();
 
-  $perusahaan = htmlspecialchars($data['perusahaan']);
-  $telp = htmlspecialchars($data['telp']);
-  $alamat = htmlspecialchars($data['alamat']);
+  $idSupp = htmlspecialchars($data['idsupplier']);
+  $obat = htmlspecialchars($data['obat']);
+  $kateg = htmlspecialchars($data['kategori']);
+  $jual = htmlspecialchars($data['jual']);
+  $beli = htmlspecialchars($data['beli']);
+  $stok = htmlspecialchars($data['stok']);
   $ket = htmlspecialchars($data['ket']);
 
-  $query = "INSERT INTO tb_supplier VALUES (
-    null, '$perusahaan', '$telp', '$alamat', '$ket'
+  $query = "INSERT INTO tb_obat VALUES (
+    null, '$idSupp', '$obat', '$kateg', '$jual', '$beli', '$stok', '$ket'
   )";
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -48,26 +51,31 @@ function insert($data) {
 function update($data) {
   $conn = connection();
 
+  $idObat = htmlspecialchars($data['idobat']);
   $idSupp = htmlspecialchars($data['idsupplier']);
-  $perusahaan = htmlspecialchars($data['perusahaan']);
-  $telp = htmlspecialchars($data['telp']);
-  $alamat = htmlspecialchars($data['alamat']);
+  $obat = htmlspecialchars($data['obat']);
+  $kateg = htmlspecialchars($data['kategori']);
+  $jual = htmlspecialchars($data['jual']);
+  $beli = htmlspecialchars($data['beli']);
+  $stok = htmlspecialchars($data['stok']);
   $ket = htmlspecialchars($data['ket']);
 
-  $query = "UPDATE tb_supplier SET
+  $query = "UPDATE tb_obat SET
             idsupplier = '$idSupp',
-            perusahaan = '$perusahaan',
-            telp = '$telp',
-            alamat = '$alamat',
+            namaobat = '$obat',
+            kategoriobat = '$kateg',
+            hargajual = '$jual',
+            hargabeli = '$beli',
+            stok = '$stok',
             keterangan = '$ket'
-            WHERE idsupplier = '$idSupp'";
+            WHERE idobat = '$idObat'";
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
 }
 
-function delete($idsupp) {
+function delete($idobat) {
   $conn = connection();
-  mysqli_query($conn, "DELETE FROM tb_supplier WHERE idsupplier = $idsupp");
+  mysqli_query($conn, "DELETE FROM tb_obat WHERE idobat = $idobat");
   return mysqli_affected_rows($conn);
 }

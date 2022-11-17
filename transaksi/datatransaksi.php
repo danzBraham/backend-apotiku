@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apotiku</title>
     <!-- Link CSS -->
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="../CSS/style.php">
     <!-- Link Fontawesome -->
     <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
     <!-- Link Unicons -->
@@ -27,53 +27,49 @@
         </nav> 
     </header>
     
-    <!-- DATAOBAT PAGE -->
+    <!-- DATATRANSAKSI PAGE -->
     <main class="table-page">
         <div class="shape one"></div>
         <div class="shape two"></div>
     
         <div class="header">
             <form action="" class="search-box">
-                <input type="text" name="" id="" placeholder="Cari Obat...">
+                <input type="text" name="" id="" placeholder="Cari Transaksi...">
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form> 
+            </form>
             <div class="btn">
                 <button id="printBtn"><i class="fa-solid fa-print"></i></button>
-                <button id="tambahBtn">Tambah Data</button>
+                <button id="tambahBtn">Tambah Transaksi</button>
             </div>
         </div>
 
         <div id="overlay" class="overlay">
-            <div id="tambahPopup" class="form-popup"> 
-                <h3>Insert Obat</h3>
+            <div id="tambahPopup" class="form-popup">
+                <h3>Insert Transaksi</h3>
                 <form action="">
                     <div class="input-box">
-                        <label for="idSupplier">ID Supplier</label>
-                        <select name="" id="idSupplier">
+                        <label for="idTransaksi">ID Transaksi</label>
+                        <select name="" id="idTransaksi">
                             <option value="xianjing">PT. Xianjing</option>
                             <option value="shelby">PT. Shelby</option>
                             <option value="sumaradu">PT. Sumaradu</option>
                         </select>
                     </div>
                     <div class="input-box">
-                        <label for="namaObat">Nama Obat</label>
-                        <input type="text" name="" id="namaObat">
+                        <label for="tanggal">Tanggal</label>
+                        <input type="text" name="" id="tanggal">
                     </div>
                     <div class="input-box">
-                        <label for="hargaJual">Harga Jual</label>
-                        <input type="text" name="" id="hargaJual">
+                        <label for="idPelanggan">ID Pelanggan</label>
+                        <select name="" id="idPelanggan">
+                            <option value="xianjing">Joko</option>
+                            <option value="shelby">Bejo</option>
+                            <option value="sumaradu">Gordo</option>
+                        </select>
                     </div>
                     <div class="input-box">
-                        <label for="hargaBeli">Harga Beli</label>
-                        <input type="text" name="" id="hargaBeli">
-                    </div>
-                    <div class="input-box">
-                        <label for="stokObat">Stok Obat</label>
-                        <input type="text" name="" id="stokObat">
-                    </div>
-                    <div class="input-box">
-                        <label for="ketObat">Keterangan Obat</label>
-                        <textarea name="" id="ketObat" rows=""></textarea>
+                        <label for="kategori">Kategori</label>
+                        <input type="text" name="" id="kategori">
                     </div>
                     <div class="btn">
                         <button id="close" type="reset">Cancel</button>
@@ -81,37 +77,33 @@
                     </div>
                 </form>
             </div>
-
-            <div id="updatePopup" class="form-popup"> 
-                <h3>Update Obat</h3>
+            
+            <div id="updatePopup" class="form-popup">
+                <h3>Update Transaksi</h3>
                 <form action="">
                     <div class="input-box">
-                        <label for="idSupplier">ID Supplier</label>
-                        <select name="" id="idSupplier">
+                        <label for="idTransaksi">ID Transaksi</label>
+                        <select name="" id="idTransaksi">
                             <option value="xianjing">PT. Xianjing</option>
                             <option value="shelby">PT. Shelby</option>
                             <option value="sumaradu">PT. Sumaradu</option>
                         </select>
                     </div>
                     <div class="input-box">
-                        <label for="namaObat">Nama Obat</label>
-                        <input type="text" name="" id="namaObat">
+                        <label for="tanggal">Tanggal</label>
+                        <input type="text" name="" id="tanggal">
                     </div>
                     <div class="input-box">
-                        <label for="hargaJual">Harga Jual</label>
-                        <input type="text" name="" id="hargaJual">
+                        <label for="idPelanggan">ID Pelanggan</label>
+                        <select name="" id="idPelanggan">
+                            <option value="xianjing">Joko</option>
+                            <option value="shelby">Bejo</option>
+                            <option value="sumaradu">Gordo</option>
+                        </select>
                     </div>
                     <div class="input-box">
-                        <label for="hargaBeli">Harga Beli</label>
-                        <input type="text" name="" id="hargaBeli">
-                    </div>
-                    <div class="input-box">
-                        <label for="stokObat">Stok Obat</label>
-                        <input type="text" name="" id="stokObat">
-                    </div>
-                    <div class="input-box">
-                        <label for="ketObat">Keterangan Obat</label>
-                        <textarea name="" id="ketObat" rows=""></textarea>
+                        <label for="kategori">Kategori</label>
+                        <input type="text" name="" id="kategori">
                     </div>
                     <div class="btn">
                         <button id="closeUpdate" type="reset">Cancel</button>
@@ -122,36 +114,26 @@
         </div>
 
         <div class="table">
-            <h2>Daftar Obat</h2>
+            <h2>Daftar Transaksi</h2>
             <table>
                 <thead>
-                    <td>Nama Obat</td>
-                    <td>Harga Beli</td>
-                    <td>Harga Jual</td>
-                    <td>Keterangan</td>
-                    <td>Supplier</td>
-                    <td>Stok</td>
+                    <td>Nama Pelanggan</td>
+                    <td>Nama Karyawan</td>
+                    <td>Tanggal</td>
+                    <td>Kategori</td>
+                    <td>Total Bayar</td>
+                    <td>Bayar</td>
+                    <td>Kembali</td>
                     <td>Aksi</td>
                 </thead>
                 <tbody>
-                    <td>Jamu</td>
-                    <td>Rp24000</td>
-                    <td>Rp14000</td>
-                    <td>Untuk Bundir</td>
-                    <td>PT. Suramadu</td>
-                    <td>100</td>
-                    <td class="btn">
-                        <button id="del">Hapus</button>
-                        <button class="update">Update</button>
-                    </td>
-                </tbody>
-                <tbody>
-                    <td>Jamu</td>
-                    <td>Rp24000</td>
-                    <td>Rp14000</td>
-                    <td>Untuk Bundir</td>
-                    <td>PT. Suramadu</td>
-                    <td>100</td>
+                    <td>Suryadanaa</td>
+                    <td>Rizky Ryan</td>
+                    <td>14-09-2022</td>
+                    <td>Member</td>
+                    <td>3.000.000</td>
+                    <td>5.000.000</td>
+                    <td>2.000.000</td>
                     <td class="btn">
                         <button id="del">Hapus</button>
                         <button class="update">Update</button>
@@ -159,6 +141,7 @@
                 </tbody>
             </table>
         </div>
+    
     </main>
 
     <script src="JS/table.js"></script>

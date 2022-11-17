@@ -1,5 +1,6 @@
 <?php header('Content-type: text/css'); ?>
 /*========= FONT FAMILY =========*/
+/*========= FONT FAMILY =========*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 /*========= CSS VARIABLE =========*/
@@ -289,10 +290,11 @@ header.slide {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  transform: scale(.8);
 }
 
 .register-page .input-container {
-  padding: 60px 40px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -336,7 +338,6 @@ header.slide {
   border-radius: 8px;
   border: 2px solid var(--text-dimmed);
   padding: 5px 5px;
-  align-items: center;
 }
 
 .register-page .input-container form .input-box .content select {
@@ -547,20 +548,36 @@ h2 {
 }
 
 .dashboard-page .dash-content .dash-data .all-data .total-data {
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center; */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
 
 .dashboard-page .dash-content .dash-data .all-data .total-data .data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  gap: 20px;
+  padding: 20px;
   background-color: var(--second-color);
-  /* width: 260px; */
   height: 140px;
   border: 2px solid var(--text-dimmed);
   border-radius: 12px;
+}
+
+.dashboard-page .dash-content .dash-data .all-data .total-data .data i{
+  color: var(--light-text);
+  font-size: 35px;
+}
+
+.dashboard-page .dash-content .dash-data .all-data .total-data .data p{
+  color: var(--light-text);
+  font-size: 16px;
+}
+
+.dashboard-page .dash-content .dash-data .all-data .total-data .data p > span{
+  font-size: 14px;
 }
 
 .dashboard-page .dash-content .dash-data .all-data .histori-tittle {
@@ -767,6 +784,7 @@ h2 {
 }
 
 .table-page .overlay {
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -805,6 +823,7 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transform: scale(.8);
   transition: 300ms ease;
 }
 .table-page .form-popup.tambah {
@@ -872,11 +891,11 @@ textarea {
   background-color: #ff7484;
 }
 
-.table-page .form-popup form .btn button[type="submit"] {
+.table-page .form-popup form .btn .submit-btn {
   background-color: var(--main-color);
   transition: 100ms ease-in-out;
 }
-.table-page .form-popup form .btn button[type="submit"]:hover {
+.table-page .form-popup form .btn .submit-btn:hover {
   background-color: #5188f7;
 }
 
@@ -906,7 +925,7 @@ textarea {
 .table-page .table table thead td,
 .table-page .table table tbody td {
   color: var(--light-text);
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 .table-page .table table thead td {
@@ -915,6 +934,11 @@ textarea {
 
 .table-page .table table tbody td {
   color: var(--text-dimmed);
+}
+
+.table-page .table table tbody td img{
+  height: 60px;
+  width: 90px;
 }
 
 .table-page .table table tbody td:first-child {

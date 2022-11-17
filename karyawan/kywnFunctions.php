@@ -18,7 +18,7 @@ function query($query) {
 function search($keyword) {
   $conn = connection();
 
-  $query = "SELECT * FROM tb_supplier WHERE perusahaan LIKE '%$keyword%'";
+  $query = "SELECT * FROM tb_karyawan WHERE namakaryawan LIKE '%$keyword%'";
   $result = mysqli_query($conn, $query);
 
   $rows = [];
@@ -32,13 +32,12 @@ function search($keyword) {
 function insert($data) {
   $conn = connection();
 
-  $perusahaan = htmlspecialchars($data['perusahaan']);
-  $telp = htmlspecialchars($data['telp']);
+  $karyawan = htmlspecialchars($data['karyawan']);
   $alamat = htmlspecialchars($data['alamat']);
-  $ket = htmlspecialchars($data['ket']);
+  $telp = htmlspecialchars($data['telp']);
 
-  $query = "INSERT INTO tb_supplier VALUES (
-    null, '$perusahaan', '$telp', '$alamat', '$ket'
+  $query = "INSERT INTO tb_karyawan VALUES (
+    null, '$karyawan', '$alamat', '$telp'
   )";
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -48,19 +47,16 @@ function insert($data) {
 function update($data) {
   $conn = connection();
 
-  $idSupp = htmlspecialchars($data['idsupplier']);
-  $perusahaan = htmlspecialchars($data['perusahaan']);
-  $telp = htmlspecialchars($data['telp']);
+  $idKywn = htmlspecialchars($data['idkaryawan']);
+  $karyawan = htmlspecialchars($data['karyawan']);
   $alamat = htmlspecialchars($data['alamat']);
-  $ket = htmlspecialchars($data['ket']);
+  $telp = htmlspecialchars($data['telp']);
 
-  $query = "UPDATE tb_supplier SET
-            idsupplier = '$idSupp',
-            perusahaan = '$perusahaan',
-            telp = '$telp',
+  $query = "UPDATE tb_karyawan SET
+            namakaryawan = '$karyawan',
             alamat = '$alamat',
-            keterangan = '$ket'
-            WHERE idsupplier = '$idSupp'";
+            telp = '$telp'
+            WHERE idkaryawan = '$idKywn'";
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
