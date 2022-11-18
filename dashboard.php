@@ -1,6 +1,6 @@
 <?php
 session_start();
-require './functions.php';
+require 'functions.php';
 
 if (!isset($_SESSION['login'])) {
   header("Location: ./index.php");
@@ -49,7 +49,7 @@ if (!isset($_SESSION['login'])) {
     <div class="dash-tittle">
       <div class="tittle">
         <?php $id = $_SESSION['id'] ?>
-        <?php $dataUser = query("SELECT * FROM tb_users WHERE id = '$id'"); ?>
+        <?php $dataUser = query("SELECT * FROM tb_users WHERE id = '$id'")[0]; ?>
         <h1>Hai <span class="active"><?= $dataUser['username']; ?></span></h1>
         <h2>Selamat Datang di Dashboard <span>👋</span></h2>
       </div>
@@ -58,8 +58,10 @@ if (!isset($_SESSION['login'])) {
         <a id="profileBtn"><?= $dataUser['username']; ?> <i class="fa-solid fa-arrow-down"></i></a>
       </div>
       <div id="profilePopup" class="profile-popup">
-        <a href="register.php"><i class="fa-solid fa-user-plus"></i> Tambah User</a>
-        <span></span>
+        <?php if (@$_SESSION['level'] != 'karyawan') : ?>
+          <a href="register.php"><i class="fa-solid fa-user-plus"></i> Tambah User</a>
+          <span></span>
+        <?php endif; ?>
         <a href="datauser.php"><i class="fa-solid fa-gear"></i> Pengaturan</a>
         <span></span>
         <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
@@ -73,15 +75,18 @@ if (!isset($_SESSION['login'])) {
           <div class="total-data">
             <div class="data">
               <i class="fa-solid fa-pills"></i>
-              <p>Banyak Obat : <span>100</span></p>
+              <?php $totalObat = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idobat) FROM tb_obat"))[0]; ?>
+              <p>Banyak Obat : <span><?= $totalObat; ?></span></p>
             </div>
             <div class="data">
               <i class="fa-solid fa-user"></i>
-              <p>Banyak Pelanggan : <span>100</span></p>
+              <?php $totalPel = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idpelanggan) FROM tb_pelanggan"))[0]; ?>
+              <p>Banyak Pelanggan : <span><?= $totalPel; ?></span></p>
             </div>
             <div class="data">
               <i class="fa-solid fa-cart-shopping"></i>
-              <p>Banyak Transaksi : <span>100</span></p>
+              <?php $totalTrans = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idtransaksi) FROM tb_transaksi"))[0]; ?>
+              <p>Banyak Transaksi : <span><?= $totalTrans; ?></span></p>
             </div>
           </div>
           <div class="histori-tittle">
@@ -89,51 +94,43 @@ if (!isset($_SESSION['login'])) {
             <a href="transaksi/datatransaksi.php">Lebih Banyak</a>
           </div>
           <div class="histori-data">
-            <div class="data">
-              <div class="profile">
-                <img src="Assets/img/profile-client.svg">
-                <div class="name">
-                  <p>Thomas Slebew</p>
-                  <p>thomasdingin@gmail.com</p>
+            <?php $historiTrans = query("SELECT * FROM tb_transaksi ORDER BY idtransaksi DESC LIMIT 2"); ?>
+            <?php foreach ($historiTrans as $trans) : ?>
+              <?php $idPel = $trans['idpelanggan']; ?>
+              <?php $pelanggan = query("SELECT * FROM tb_pelanggan WHERE idpelanggan = '$idPel' ORDER BY idpelanggan ASC LIMIT 2"); ?>
+              <div class="data">
+                <div class="profile">
+                  <img src="Assets/img/profile-client.svg">
+                  <div class="name">
+                    <?php foreach ($pelanggan as $pel) : ?>
+                      <p><?= $pel['namapelanggan']; ?></p>
+                    <?php endforeach; ?>
+                  </div>
                 </div>
+                <p><?= $trans['tgltransaksi']; ?></p>
+                <p>Rp<?= number_format($trans['totalbayar'], '0', ',', '.'); ?></p>
+                <button>Detail</button>
               </div>
-              <p>Paracetamol</p>
-              <p>Rp24000</p>
-              <button>Detail</button>
-            </div>
-            <div class="data">
-              <div class="profile">
-                <img src="Assets/img/profile-client.svg">
-                <div class="name">
-                  <p>Thomas Slebew</p>
-                  <p>thomasdingin@gmail.com</p>
-                </div>
-              </div>
-              <p>Paracetamol</p>
-              <p>Rp24000</p>
-              <button>Detail</button>
-            </div>
+            <?php endforeach; ?>
         </section>
 
         <section class="data-karyawan">
           <h3>Data Karyawan</h3>
-          <div class="karyawan">
-            <img src="Assets/img/profile-karyawan.svg">
-            <div class="name">
-              <p>Thomas Slebew</p>
-              <p>thomasdingin@gmail.com</p>
+          <?php $dataKywn = query("SELECT namakaryawan, telp FROM tb_karyawan LIMIT 2"); ?>
+          <?php foreach ($dataKywn as $kywn) : ?>
+            <div class="karyawan">
+              <img src="Assets/img/profile-karyawan.svg">
+              <div class="name">
+                <p><?= $kywn['namakaryawan']; ?></p>
+                <p><?= $kywn['telp']; ?></p>
+              </div>
             </div>
-          </div>
-          <div class="karyawan">
-            <img src="Assets/img/profile-karyawan.svg">
-            <div class="name">
-              <p>Thomas Slebew</p>
-              <p>thomasdingin@gmail.com</p>
-            </div>
-          </div>
+          <?php endforeach; ?>
           <div class="btn">
             <img src="Assets/img/img-karyawan.svg">
-            <a href="karyawan/datakaryawan.php">Lihat Semua</a>
+            <?php if (@$_SESSION['level'] === 'admin') : ?>
+              <a href="karyawan/datakaryawan.php">Lihat Semua</a>
+            <?php endif; ?>
           </div>
         </section>
       </section>

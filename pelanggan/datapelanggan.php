@@ -2,13 +2,6 @@
 session_start();
 require 'pelFunctions.php';
 
-if ($_SESSION['level'] !== 'admin') {
-  echo "<script>
-          alert('Anda Karyawan!');
-          document.location.href = '../dashboard.php';
-        </script>";
-}
-
 if (isset($_POST['add'])) {
   if (insert($_POST) > 0) {
     echo "<script>
@@ -75,7 +68,7 @@ $dataPel = query('SELECT * FROM tb_pelanggan');
         <li><a href="../transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
         <li><a href="../karyawan/datakaryawan.php"><i class="fa-solid fa-users"></i> <span>Table Karyawan</span> </a></li>
       <?php else : ?>
-        <li><a href="../pelanggan/datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
+        <li><a href="datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
         <li><a href="../transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
       <?php endif; ?>
     </nav>
@@ -176,7 +169,9 @@ $dataPel = query('SELECT * FROM tb_pelanggan');
           <td>Alamat</td>
           <td>Usia</td>
           <td>Bukti Resep</td>
-          <td>Aksi</td>
+          <?php if (@$_SESSION['level'] === 'admin') : ?>
+            <td>Aksi</td>
+          <?php endif; ?>
         </thead>
         <?php foreach ($dataPel as $pel) : ?>
           <?php if ($pel['idpelanggan'] != 3) : ?>
@@ -186,10 +181,12 @@ $dataPel = query('SELECT * FROM tb_pelanggan');
               <td><?= $pel['alamat']; ?></td>
               <td><?= $pel['usia']; ?></td>
               <td><img src="buktifoto/<?= $pel['buktifotoresep']; ?>" alt="tidak ada foto"></td>
-              <td class="btn">
-                <a href="pelDelete.php?idpelanggan=<?= $pel['idpelanggan']; ?>" onclick="return confirm('Yakin ingin menghapus data ini?')"><button id="del">Hapus</button></a>
-                <a href="datapelanggan.php?idpelanggan=<?= $pel['idpelanggan']; ?>"><button class="update">Update</button></a>
-              </td>
+              <?php if (@$_SESSION['level'] === 'admin') : ?>
+                <td class="btn">
+                  <a href="pelDelete.php?idpelanggan=<?= $pel['idpelanggan']; ?>" onclick="return confirm('Yakin ingin menghapus data ini?')"><button id="del">Hapus</button></a>
+                  <a href="datapelanggan.php?idpelanggan=<?= $pel['idpelanggan']; ?>"><button class="update">Update</button></a>
+                </td>
+              <?php endif; ?>
             </tbody>
           <?php endif; ?>
         <?php endforeach; ?>

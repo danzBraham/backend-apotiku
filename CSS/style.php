@@ -338,6 +338,7 @@ header.slide {
   border-radius: 8px;
   border: 2px solid var(--text-dimmed);
   padding: 5px 5px;
+  align-items: center;
 }
 
 .register-page .input-container form .input-box .content select {

@@ -1,18 +1,25 @@
+<?php
+session_start();
+require 'transFunctions.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Transaksi</title>
     <!-- Link CSS -->
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="../CSS/style.php">
     <!-- Link FontAwesome -->
     <!-- Link Fontawesome -->
     <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <a class="back-btn" href="dashboard.html"><i class="fa-solid fa-arrow-left"></i></a>
+    <a class="back-btn" href="datatransaksi.php"><i class="fa-solid fa-arrow-left"></i></a>
     <h1 class="tittle-detail">Detail Transaksi</h1>
 
     <main class="content-detail">
@@ -64,7 +71,8 @@
             <button id="lihatTrans">Lihat Semua Transaksi</button>
         </div>
     </main>
-    
+
     <script src="JS/detail.js"></script>
 </body>
+
 </html>

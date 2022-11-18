@@ -1,5 +1,4 @@
 <?php
-
 function connection() {
   return mysqli_connect('localhost', 'root', '', 'proyek_apotiku');
 }
@@ -7,30 +6,24 @@ function connection() {
 function query($query) {
   $conn = connection();
   $result = mysqli_query($conn, $query);
-  
-  if (mysqli_num_rows($result) === 1) {
-    return mysqli_fetch_assoc($result);
-  }
 
   $rows = [];
   while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
   }
-
+  
   return $rows;
 }
 
-function queryReg($query) {
+function queryLogin($query) {
   $conn = connection();
   $result = mysqli_query($conn, $query);
 
   $rows = [];
-  if (mysqli_num_rows($result) === 1) {
-    while ($row = mysqli_fetch_assoc($result)) {
-      $rows[] = $row;
-    }
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
   }
-
+  
   return $rows;
 }
 
@@ -38,14 +31,14 @@ function login($data) {
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
 
-  if ($user = query("SELECT * FROM tb_users WHERE username = '$username'")) {
+  if ($user = query("SELECT * FROM tb_users WHERE username = '$username'")[0]) {
     if(password_verify($password, $user['password'])) {
       $_SESSION['login'] = true;
       $_SESSION['id'] = $user['id'];
       $_SESSION['level'] = $user['level'];
       $_SESSION['idkaryawan'] = $user['idkaryawan'];
   
-      header('Location: ./dashboard.php');
+      header('Location: dashboard.php');
       exit;
     }
   }
@@ -58,11 +51,11 @@ function login($data) {
 function register($data) {
   $conn = connection();
 
-  $level = htmlspecialchars($data['level']);
   $idKywn = htmlspecialchars($data['idkaryawan']);
   $username = htmlspecialchars(strtolower($data['username']));
   $password = mysqli_real_escape_string($conn, $data['password']);
   $confirmPass = mysqli_real_escape_string($conn, $data['confirmPass']);
+  $level = htmlspecialchars($data['level']);
 
   if (empty($idKywn) || empty($username) || empty($password) || empty($confirmPass)) {
     echo "<script>
@@ -89,8 +82,8 @@ function register($data) {
 
   if (strlen($confirmPass) < 6) {
     echo "<script>
-              alert('Your password is less than 5 digits');
-              document.location.href = 'register.php';
+            alert('Your password is less than 5 digits');
+            document.location.href = 'register.php';
           </script>";
     return false;
   }
@@ -98,7 +91,7 @@ function register($data) {
   $pwsEncrypt = password_hash($confirmPass, PASSWORD_BCRYPT);
 
   $query = "INSERT INTO tb_users VALUES (
-    NULL, '$username', '$pwsEncrypt', '$level', '$idKywn'
+    null, '$username', '$pwsEncrypt', '$level', '$idKywn', 'jometal.jpg'
   )";
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));

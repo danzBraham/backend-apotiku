@@ -1,3 +1,20 @@
+<?php
+session_start();
+require 'functions.php';
+
+if (isset($_POST['register'])) {
+  if (register($_POST) > 0) {
+    echo "<script>
+            alert('User Berhasil Ditambah!');
+            document.location.href = 'dashboard.php';
+          </script>";
+  } else {
+    echo "<script>
+            alert('Gagal Menambah User!');
+          </script>";
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,15 +41,20 @@
           Datang di <span class="active">Apotiku!</span> <span>👋</span>
         </h2>
         <h1>Register</h1>
-        <form action="" method="">
+        <form action="" method="POST" autocomplete="off">
           <div class="input-box">
             <label for="karyawan">Nama Karyawan</label>
             <div class="content">
               <i class="fa-solid fa-user"></i>
-              <select name="" id="karyawan">
-                <option value="">Owi Ngawi</option>
-                <option value="">Owi Ngawi</option>
-                <option value="">Owi Ngawi</option>
+              <select name="idkaryawan" id="karyawan">
+                <?php $dataKaryawan = query('SELECT * FROM tb_karyawan WHERE idkaryawan NOT IN (SELECT idkaryawan from tb_users)'); ?>
+                <?php foreach ($dataKaryawan as $kywn) : ?>
+                  <?php if ($kywn['idkaryawan'] !== 0) : ?>
+                    <option value="<?= $kywn['idkaryawan']; ?>"><?= $kywn['namakaryawan']; ?></option>
+                  <?php else : ?>
+                    <option value="">Semua Karyawan Sudah Terdaftar</option>
+                  <?php endif; ?>
+                <?php endforeach; ?>
               </select>
             </div>
           </div>
@@ -41,15 +63,16 @@
             <label for="username">Username</label>
             <div class="content">
               <i class="fa-solid fa-user"></i>
-              <input autocomplete="off" type="text" name="username" />
+              <input type="text" name="username" id="username" />
             </div>
           </div>
 
           <div class="input-box">
-            <div class="valdi"><label for="password">Password</label> <span>*Invalid Password</span></div>
+            <!-- <div class="valdi"><label for="password">Password</label> <span>*Invalid Password</span></div> -->
+            <label for="password">Password</label>
             <div class="content">
               <i class="fa-solid fa-lock"></i>
-              <input autocomplete="off" type="password" name="password" />
+              <input type="password" name="password" id="password"/>
             </div>
           </div>
 
@@ -57,23 +80,22 @@
             <label for="confirmPass">Confirm Password</label>
             <div class="content">
               <i class="fa-solid fa-circle-check"></i>
-              <input autocomplete="off" type="password" name="confirmPass" />
+              <input type="password" name="confirmPass" id="confirmPass" />
             </div>
           </div>
 
           <div class="input-box">
-            <label for="karyawan">Level</label>
+            <label for="level">Level</label>
             <div class="content">
               <i class="fa-solid fa-user"></i>
-              <select name="" id="karyawan">
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
+              <select name="level" id="level">
+                <option value="karyawan">Karyawan</option>
+                <option value="admin">Admin</option>
               </select>
             </div>
           </div>
 
-          <button type="submit">Register</button>
+          <button type="submit" name="register">Register</button>
         </form>
       </div>
     </section>
