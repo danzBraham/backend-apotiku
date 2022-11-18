@@ -178,13 +178,6 @@ $dataPel = query('SELECT * FROM tb_pelanggan');
           <td>Bukti Resep</td>
           <td>Aksi</td>
         </thead>
-
-        <?php if (empty($dataPel)) : ?>
-          <tbody>
-            <td>Pelanggan Tidak Ditemukan</td=>
-          </tbody>
-        <?php endif; ?>
-
         <?php foreach ($dataPel as $pel) : ?>
           <?php if ($pel['idpelanggan'] != 3) : ?>
             <tbody>

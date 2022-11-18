@@ -15,7 +15,7 @@ $dataSupp = search($_GET['keyword']);
 
   <?php if (empty($dataSupp)) : ?>
     <tbody>
-      <td>Supplier Tidak Ditemukan</td>
+      <td colspan="5" align="center">Supplier Tidak Ditemukan</td>
     </tbody>
   <?php endif; ?>
 

@@ -17,7 +17,7 @@ $dataObat = search($_GET['keyword']);
 
   <?php if (empty($dataObat)) : ?>
     <tbody>
-      <td>Obat Tidak Ditemukan</td=>
+      <td colspan="7" align="center">Obat Tidak Ditemukan</td>
     </tbody>
   <?php endif; ?>
 

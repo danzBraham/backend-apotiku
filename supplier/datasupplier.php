@@ -164,18 +164,11 @@ $dataSupp = query('SELECT * FROM tb_supplier');
       <table>
         <thead>
           <td>Nama Supplier</td>
-          <td>No Tlp.</td>
+          <td>No Telp</td>
           <td>Alamat</td>
           <td>Keterangan</td>
           <td>Aksi</td>
         </thead>
-
-        <?php if (empty($dataSupp)) : ?>
-          <tbody>
-            <td>Supplier Tidak Ditemukan</td>
-          </tbody>
-        <?php endif; ?>
-
         <?php foreach ($dataSupp as $supp) : ?>
           <tbody>
             <td><?= $supp['perusahaan']; ?></td>

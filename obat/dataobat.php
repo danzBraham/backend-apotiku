@@ -204,13 +204,6 @@ $dataSupplier = query('SELECT idsupplier, perusahaan FROM tb_supplier');
           <td>Stok</td>
           <td>Aksi</td>
         </thead>
-
-        <?php if (empty($dataObat)) : ?>
-          <tbody>
-            <td>Obat Tidak Ditemukan</td=>
-          </tbody>
-        <?php endif; ?>
-
         <?php foreach ($dataObat as $obat) : ?>
           <tbody>
             <td><?= $obat['namaobat']; ?></td>

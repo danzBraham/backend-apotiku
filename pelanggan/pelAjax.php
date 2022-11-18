@@ -16,7 +16,7 @@ $dataPel = search($_GET['keyword']);
 
   <?php if (empty($dataPel)) : ?>
     <tbody>
-      <td>Pelanggan Tidak Ditemukan</td=>
+      <td colspan="6" align="center">Pelanggan Tidak Ditemukan</td=>
     </tbody>
   <?php endif; ?>
 

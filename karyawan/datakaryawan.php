@@ -159,13 +159,6 @@ $dataKywn = query('SELECT * FROM tb_karyawan');
           <td>No Telp</td>
           <td>Aksi</td>
         </thead>
-
-        <?php if (empty($dataKywn)) : ?>
-          <tbody>
-            <td colspan="4" align="center">Karyawan Tidak Ditemukan</td>
-          </tbody>
-        <?php endif; ?>
-
         <?php foreach ($dataKywn as $kywn) : ?>
           <tbody>
             <td><?= $kywn['namakaryawan']; ?></td>
