@@ -1,6 +1,5 @@
 <?php header('Content-type: text/css'); ?>
 /*========= FONT FAMILY =========*/
-/*========= FONT FAMILY =========*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 /*========= CSS VARIABLE =========*/
@@ -461,7 +460,7 @@ header.slide {
   display: flex;
   flex-direction: column;
   gap: 25px;
-  right: 0;
+  right: 20px;
   bottom: -250px;
   background-color: var(--box-color);
   padding: 30px;
@@ -473,6 +472,10 @@ header.slide {
   visibility: visible;
   opacity: 1;
   transform: translateY(0px);
+}
+
+.dashboard-page .dash-tittle .profile-popup.user{
+  bottom: -180px;
 }
 
 .dashboard-page .dash-tittle .profile-popup a {
@@ -849,6 +852,10 @@ h2 {
   gap: 14px;
 }
 
+.table-page .form-popup form input{
+  color: var(--light-text);
+}
+
 .table-page .form-popup form .input-box {
   display: flex;
   flex-direction: column;
@@ -925,12 +932,12 @@ textarea {
 
 .table-page .table table thead td,
 .table-page .table table tbody td {
-  color: var(--light-text);
   padding: 10px 20px;
 }
 
 .table-page .table table thead td {
   font-weight: 500;
+  color: var(--light-text);
 }
 
 .table-page .table table tbody td {
@@ -944,7 +951,6 @@ textarea {
 
 .table-page .table table tbody td:first-child {
   color: var(--light-text);
-  font-size: 18px;
   font-weight: 500;
 }
 
@@ -1115,6 +1121,50 @@ textarea {
   .register-page {
     width: 100%;
     height: 100vh;
+  }
+}
+
+/*========= PRINT =========*/
+@media print{
+  header{
+    display: none;
+  }
+
+  .table-page{
+    padding: 0;
+  }
+
+  .table-page .header{
+    display: none;
+  }
+
+  .table-page .table{
+    transform: scale(.9);
+  }
+
+  .table-page .table table{
+    width: 100%;
+  }
+
+  .table-page .table table thead td,
+  .table-page .table table tbody td {
+    border: 1px solid var(--text-dimmed);
+    font-size: 14px;
+    color: var(--text-dimmed);
+  }
+
+  .table-page .table table tbody td:first-child {
+    color: var(--text-dimmed);
+    font-weight: normal;
+  }
+
+  .table-page .table table tbody .btn button{
+    color: var(--text-dimmed);
+  }
+
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 

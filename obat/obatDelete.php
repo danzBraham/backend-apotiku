@@ -9,7 +9,7 @@ if ($_SESSION['level'] !== 'admin') {
       </script>";
 }
 
-$idobat = $_GET["idobat"];
+$idobat = $_GET['idobat'];
 
 if (delete($idobat) > 0) {
   echo "<script>

@@ -16,13 +16,30 @@ function query($query) {
   return $rows;
 }
 
+function search($keyword) {
+  $conn = connection();
+
+  $query = "SELECT * FROM tb_transaksi
+            INNER JOIN tb_pelanggan USING(idpelanggan)
+            INNER JOIN tb_karyawan USING(idkaryawan)
+            WHERE namapelanggan LIKE '%$keyword%'";
+  $result = mysqli_query($conn, $query);
+
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+
+  return $rows;
+}
+
 function umum() {
   $conn = connection();
 
   $idPel = 3;
   $idKrywn = $_SESSION['idkaryawan'];
   $tglTrans = date('Y-m-d');
-  $kategPel = 'umum';
+  $kategPel = 'Umum';
 
   mysqli_query($conn, "INSERT INTO tb_transaksi VALUES (
     null, $idPel, $idKrywn, '$tglTrans', '$kategPel', 0, 0, 0
@@ -96,8 +113,8 @@ function saveTrans($data) {
   return query("SELECT * FROM tb_transaksi WHERE idtransaksi = $idTrans")[0];
 }
 
-function delete($idobat) {
+function delete($idtrans) {
   $conn = connection();
-  mysqli_query($conn, "DELETE FROM tb_obat WHERE idobat = $idobat");
+  mysqli_query($conn, "DELETE FROM tb_transaksi WHERE idtransaksi = $idtrans");
   return mysqli_affected_rows($conn);
 }

@@ -57,15 +57,21 @@ if (!isset($_SESSION['login'])) {
         <img src="Assets/profilePict/<?= $dataUser['picture']; ?>" alt="Profile">
         <a id="profileBtn"><?= $dataUser['username']; ?> <i class="fa-solid fa-arrow-down"></i></a>
       </div>
-      <div id="profilePopup" class="profile-popup">
-        <?php if (@$_SESSION['level'] != 'karyawan') : ?>
+      <?php if (@$_SESSION['level'] === 'admin') : ?>
+        <div id="profilePopup" class="profile-popup">
           <a href="register.php"><i class="fa-solid fa-user-plus"></i> Tambah User</a>
           <span></span>
-        <?php endif; ?>
-        <a href="datauser.php"><i class="fa-solid fa-gear"></i> Pengaturan</a>
-        <span></span>
-        <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-      </div>
+          <a href="datauser.php"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+          <span></span>
+          <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+      <?php elseif (@$_SESSION['level'] === 'karyawan') : ?>
+        <div id="profilePopup" class="profile-popup user">
+          <a href="datauser.php"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+          <span></span>
+          <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+      <?php endif; ?>
     </div>
 
     <section class="dash-content">
@@ -73,11 +79,13 @@ if (!isset($_SESSION['login'])) {
       <section class="dash-data">
         <section class="all-data">
           <div class="total-data">
-            <div class="data">
-              <i class="fa-solid fa-pills"></i>
-              <?php $totalObat = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idobat) FROM tb_obat"))[0]; ?>
-              <p>Banyak Obat : <span><?= $totalObat; ?></span></p>
-            </div>
+            <?php if (@$_SESSION['level'] === 'admin') : ?>
+              <div class="data">
+                <i class="fa-solid fa-pills"></i>
+                <?php $totalObat = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idobat) FROM tb_obat"))[0]; ?>
+                <p>Banyak Obat : <span><?= $totalObat; ?></span></p>
+              </div>
+            <?php endif; ?>
             <div class="data">
               <i class="fa-solid fa-user"></i>
               <?php $totalPel = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idpelanggan) FROM tb_pelanggan"))[0]; ?>
@@ -114,25 +122,27 @@ if (!isset($_SESSION['login'])) {
             <?php endforeach; ?>
         </section>
 
-        <section class="data-karyawan">
-          <h3>Data Karyawan</h3>
-          <?php $dataKywn = query("SELECT namakaryawan, telp FROM tb_karyawan LIMIT 2"); ?>
-          <?php foreach ($dataKywn as $kywn) : ?>
-            <div class="karyawan">
-              <img src="Assets/img/profile-karyawan.svg">
-              <div class="name">
-                <p><?= $kywn['namakaryawan']; ?></p>
-                <p><?= $kywn['telp']; ?></p>
+        <?php if (@$_SESSION['level'] === 'admin') : ?>
+          <section class="data-karyawan">
+            <h3>Data Karyawan</h3>
+            <?php $dataKywn = query("SELECT namakaryawan, telp FROM tb_karyawan LIMIT 2"); ?>
+            <?php foreach ($dataKywn as $kywn) : ?>
+              <div class="karyawan">
+                <img src="Assets/img/profile-karyawan.svg">
+                <div class="name">
+                  <p><?= $kywn['namakaryawan']; ?></p>
+                  <p><?= $kywn['telp']; ?></p>
+                </div>
               </div>
+            <?php endforeach; ?>
+            <div class="btn">
+              <img src="Assets/img/img-karyawan.svg">
+              <?php if (@$_SESSION['level'] === 'admin') : ?>
+                <a href="karyawan/datakaryawan.php">Lihat Semua</a>
+              <?php endif; ?>
             </div>
-          <?php endforeach; ?>
-          <div class="btn">
-            <img src="Assets/img/img-karyawan.svg">
-            <?php if (@$_SESSION['level'] === 'admin') : ?>
-              <a href="karyawan/datakaryawan.php">Lihat Semua</a>
-            <?php endif; ?>
-          </div>
-        </section>
+          </section>
+        <?php endif; ?>
       </section>
     </section>
   </main>

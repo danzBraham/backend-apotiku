@@ -15,18 +15,6 @@ function query($query) {
   return $rows;
 }
 
-function queryLogin($query) {
-  $conn = connection();
-  $result = mysqli_query($conn, $query);
-
-  $rows = [];
-  while ($row = mysqli_fetch_assoc($result)) {
-    $rows[] = $row;
-  }
-  
-  return $rows;
-}
-
 function login($data) {
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
@@ -37,7 +25,7 @@ function login($data) {
       $_SESSION['id'] = $user['id'];
       $_SESSION['level'] = $user['level'];
       $_SESSION['idkaryawan'] = $user['idkaryawan'];
-  
+
       header('Location: dashboard.php');
       exit;
     }
