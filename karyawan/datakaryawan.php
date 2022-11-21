@@ -55,7 +55,6 @@ $dataKywn = query('SELECT * FROM tb_karyawan');
   <title>Apotiku</title>
   <!-- Link CSS -->
   <link rel="stylesheet" href="../CSS/style.php">
-  <link rel="stylesheet" href="../CSS/print.php">
   <!-- Link Fontawesome -->
   <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
   <!-- Link Unicons -->

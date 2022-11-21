@@ -10,7 +10,6 @@ if (@$_GET['idtransaksi']) {
   $idTrans = $_SESSION['idtransaksi'];
 }
 
-// $idTrans = $_SESSION['idtransaksi'];
 $dataTrans = query("SELECT * FROM tb_transaksi WHERE idtransaksi = '$idTrans'")[0];
 
 $idPel = $dataTrans['idpelanggan'];
@@ -27,10 +26,9 @@ $dataKywn = query("SELECT namakaryawan FROM tb_karyawan WHERE idkaryawan = '$idK
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detail Transaksi</title>
+  <title>Apotiku</title>
   <!-- Link CSS -->
   <link rel="stylesheet" href="../CSS/style.php">
-  <!-- Link FontAwesome -->
   <!-- Link Fontawesome -->
   <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
 </head>
@@ -80,14 +78,18 @@ $dataKywn = query("SELECT namakaryawan FROM tb_karyawan WHERE idkaryawan = '$idK
     </table>
 
     <?php if (@$_POST['finish']) : ?>
-      <form action="" method="POST" style="border: 2px solid #000; width: fit-content; padding: 15px;">
-        <label for="jumlahBayar"><h2>Masukkan Jumlah Bayar</h2></label>
-        <input type="number" id="jumlahBayar" name="bayar" placeholder="Jumlah Bayar...">
-        <input type="submit" value="Simpan Transaksi" name="simpan_transaksi">
+      <form action="" method="POST" class="form-data" autocomplete="off">
+        <div class="input-box">
+          <label for="jumlahBayar">Jumlah Bayar</label>
+          <input type="text" id="jumlahBayar" name="bayar" placeholder="Masukkan Jumlah Bayar...">
+        </div>
+        <div class="btn">
+          <input type="submit" value="Simpan Transaksi" name="simpan_transaksi">
+        </div>
       </form>
-      <?php  elseif (@$_POST['simpan_transaksi']) : ?>
-        <?php $transaksi = saveTrans($_POST); ?>
-    <div class="data-nota">
+    <?php elseif (@$_POST['simpan_transaksi']) : ?>
+      <?php $transaksi = saveTrans($_POST); ?>
+      <div class="data-nota">
         <p class="head">Bayar</p>
         <p><?= number_format($transaksi['bayar'], 0, ',', '.'); ?></p>
         <p class="head">Total Bayar</p>
@@ -99,26 +101,28 @@ $dataKywn = query("SELECT namakaryawan FROM tb_karyawan WHERE idkaryawan = '$idK
         <a href="datatransaksi.php"><button id="lihatTrans">Lihat Semua Transaksi</button></a>
       </div>
     <?php else : ?>
-      <?php if (!@$_GET['idobat']):  ?>
-      <form action="" method="POST">
-        <input type="text" list="obat" name="obat" placeholder="Pilih Obat">
-        <datalist id="obat">
-          <?php $dataObat = query("SELECT namaobat, hargajual FROM tb_obat"); ?>
-          <?php foreach ($dataObat as $obat) : ?>
-            <option value="<?= $obat['namaobat']; ?>"> | Rp.<?= number_format($obat['hargajual'], 0, ',', '.'); ?>
-          <?php endforeach; ?>
-        </datalist>
-        <input type="number" name="jumlah" placeholder="Jumlah" style="width: 80px;">
-        <br><br>
-        <input type="submit" value="Masukkan Obat" name="more">
-        <input type="submit" value="Selesai" name="finish">
-      </form>
+      <?php if (!@$_GET['idobat']) :  ?>
+        <form action="" method="POST" class="form-data" autocomplete="off">
+          <div class="input-box">
+            <input type="text" list="obat" name="obat" placeholder="Pilih Obat">
+            <datalist id="obat">
+              <?php $dataObat = query("SELECT namaobat, hargajual FROM tb_obat"); ?>
+              <?php foreach ($dataObat as $obat) : ?>
+                <option value="<?= $obat['namaobat']; ?>"> Rp.<?= number_format($obat['hargajual'], 0, ',', '.'); ?>
+                <?php endforeach; ?>
+            </datalist>
+          </div>
+          <div class="input-box">
+            <label for="jumlahObat">Jumlah</label>
+            <input type="number" name="jumlah" id="jumlahObat" placeholder="Masukkan Jumlah">
+          </div>
+          <div class="btn">
+            <input type="submit" value="Masukkan Obat" name="more">
+            <input type="submit" value="Selesai" name="finish" class="next-btn">
+          </div>
+        </form>
       <?php endif; ?>
     <?php endif; ?>
-    <!-- <div class="btn">
-      <button id="transBaru">Masukkan Transaksi Baru</button>
-      <button id="lihatTrans">Lihat Semua Transaksi</button>
-    </div> -->
   </main>
 
   <script src="../JS/detail.js"></script>

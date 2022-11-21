@@ -127,7 +127,7 @@ function upload() {
   return $new_file_name;
 }
 
-function update($data) {
+function updateProfile($data) {
   $conn = connection();
 
   $idKar = htmlspecialchars($data['idkaryawan']);

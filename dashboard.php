@@ -61,13 +61,13 @@ if (!isset($_SESSION['login'])) {
         <div id="profilePopup" class="profile-popup">
           <a href="register.php"><i class="fa-solid fa-user-plus"></i> Tambah User</a>
           <span></span>
-          <a href="datauser.php"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+          <a href="datauser.php?idkaryawan=<?= $dataUser['idkaryawan']; ?>"><i class="fa-solid fa-gear"></i> Pengaturan</a>
           <span></span>
           <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
         </div>
       <?php elseif (@$_SESSION['level'] === 'karyawan') : ?>
         <div id="profilePopup" class="profile-popup user">
-          <a href="datauser.php"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+          <a href="datauser.php?idkaryawan=<?= $dataUser['idkaryawan']; ?>"><i class="fa-solid fa-gear"></i> Pengaturan</a>
           <span></span>
           <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
         </div>

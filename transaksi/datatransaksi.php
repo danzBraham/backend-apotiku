@@ -15,6 +15,12 @@ if (isset($_POST['add'])) {
   }
 }
 
+if (isset($_POST['cancel'])) {
+  echo "<script>
+          document.location.href = 'datatransaksi.php';
+        </script>";
+}
+
 $dataTrans = query('SELECT * FROM tb_transaksi INNER JOIN tb_pelanggan USING(idpelanggan) INNER JOIN tb_karyawan USING(idkaryawan) ORDER BY idtransaksi DESC;');
 ?>
 
@@ -28,7 +34,6 @@ $dataTrans = query('SELECT * FROM tb_transaksi INNER JOIN tb_pelanggan USING(idp
   <title>Apotiku</title>
   <!-- Link CSS -->
   <link rel="stylesheet" href="../CSS/style.php">
-  <link rel="stylesheet" href="../CSS/print.php">
   <!-- Link Fontawesome -->
   <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
   <!-- Link Unicons -->
@@ -70,91 +75,94 @@ $dataTrans = query('SELECT * FROM tb_transaksi INNER JOIN tb_pelanggan USING(idp
       </div>
     </div>
 
-    <div id="overlay" class="overlay">
-      <div id="tambahPopup" class="form-popup">
-        <h3>Insert Transaksi</h3>
-        <form action="" method="POST">
-          <div class="input-box">
-            <label for="kategoriPel">Kategori Pelanggan</label>
-            <select name="kategori" id="kategoriPel">
-              <option value="umum">Umum</option>
-              <option value="member">Member</option>
-            </select>
-          </div>
-          <div class="btn">
-            <button id="close" type="reset">Cancel</button>
-            <button id="close" type="submit" class="submit-btn">Next</button>
-          </div>
-        </form>
-
-        <?php if (@$_POST['kategori'] == 'member') : ?>
-          <div id="updatePopup" class="form-popup update">
-            <form action="" method="POST">
-              <div class="input-box">
-                <label for="tanggal">Nama Pelanggan</label>
-                <input type="text" list="namaPealnggan" name="namaPelanggan" id="tanggal">
-                <datalist id="namaPelanggan">
-                  <?php $dataPelanggan = query('SELECT namapelanggan FROM tb_pelanggan'); ?>
-                  <?php foreach ($dataPelanggan as $pel) : ?>
-                    <option value="<?= $pel['namapelanggan']; ?>">
-                    <?php endforeach; ?>
-                </datalist>
-              </div>
-              <div class="btn">
-                <button id="close" type="reset">Cancel</button>
-                <button id="close" type="submit" class="submit-btn" name="add">Submit</button>
-              </div>
-            </form>
-          </div>
-        <?php elseif (@$_POST['kategori'] == 'umum') : ?>
-          <?php if (umum() > 0) : ?>
-            <?php
-            echo "<script>
+    <?php if (!@$_POST['kategori'] == 'member') : ?>
+      <div id="overlay" class="overlay">
+        <div id="tambahPopup" class="form-popup">
+          <h3>Insert Transaksi</h3>
+          <form action="" method="POST">
+            <div class="input-box">
+              <label for="kategoriPel">Kategori Pelanggan</label>
+              <select name="kategori" id="kategoriPel">
+                <option value="umum">Umum</option>
+                <option value="member">Member</option>
+              </select>
+            </div>
+            <div class="btn">
+              <button id="close" type="reset">Cancel</button>
+              <button id="close" type="submit" class="submit-btn">Next</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    <?php elseif (@$_POST['kategori'] == 'member') : ?>
+      <div id="overlay" class="overlay update">
+        <div id="tambahPopup" class="form-popup update">
+          <h3>Insert Transaksi</h3>
+          <form action="" method="POST" autocomplete="off">
+            <div class="input-box">
+              <label for="tanggal">Nama Pelanggan</label>
+              <input type="text" list="namaPelanggan" name="namaPelanggan" id="tanggal">
+              <datalist id="namaPelanggan">
+                <?php $dataPelanggan = query("SELECT namapelanggan FROM tb_pelanggan WHERE NOT namapelanggan = 'Belum menjadi member'"); ?>
+                <?php foreach ($dataPelanggan as $pel) : ?>
+                  <option value="<?= $pel['namapelanggan']; ?>">
+                  <?php endforeach; ?>
+              </datalist>
+            </div>
+            <div class="btn">
+              <button id="close" type="submit" name="cancel">Cancel</button>
+              <button id="close" type="submit" class="submit-btn" name="add">Submit</button>
+            </div>
+        </div>
+      <?php elseif (@$_POST['kategori'] == 'umum') : ?>
+        <?php if (umum() > 0) : ?>
+          <?php
+          echo "<script>
                     alert('Data Berhasil Ditambah!');
                     document.location.href = 'detailtransaksi.php';
                   </script>";
-            ?>
-          <?php else : ?>
-            <?php
-            echo "<script>
+          ?>
+        <?php else : ?>
+          <?php
+          echo "<script>
                     alert('Data Gagal Ditambah!');
                   </script>";
-            ?>
-          <?php endif; ?>
+          ?>
         <?php endif; ?>
+      <?php endif; ?>
       </div>
-    </div>
+      </div>
 
-    <div class="table">
-      <h2>Daftar Transaksi</h2>
-      <table>
-        <thead>
-          <td>Nama Pelanggan</td>
-          <td>Nama Karyawan</td>
-          <td>Tanggal</td>
-          <td>Kategori</td>
-          <td>Total Bayar</td>
-          <td>Bayar</td>
-          <td>Kembali</td>
-          <td>Aksi</td>
-        </thead>
-        <?php foreach ($dataTrans as $trans) : ?>
-          <tbody>
-            <td><?= $trans['namapelanggan']; ?></td>
-            <td><?= $trans['namakaryawan']; ?></td>
-            <td><?= $trans['tgltransaksi']; ?></td>
-            <td><?= $trans['kategoripelanggan']; ?></td>
-            <td><?= number_format($trans['totalbayar'], 0, ',', '.'); ?></td>
-            <td><?= number_format($trans['bayar'], 0, ',', '.'); ?></td>
-            <td><?= number_format($trans['kembali'], 0, ',', '.'); ?></td>
-            <td class="btn">
-              <a href="transDelete.php?idtransaksi=<?= $trans['idtransaksi']; ?>"><button id="del">Hapus</button></a>
-              <a href="detailtransaksi.php?idtransaksi=<?= $trans['idtransaksi']; ?>"><button class="update">Detail</button></a>
-            </td>
-          </tbody>
-        <?php endforeach; ?>
-      </table>
-    </div>
+      <div class="table">
+        <h2>Daftar Transaksi</h2>
+        <table>
+          <thead>
+            <td>Nama Pelanggan</td>
+            <td>Nama Karyawan</td>
+            <td>Tanggal</td>
+            <td>Kategori</td>
+            <td>Total Bayar</td>
+            <td>Bayar</td>
+            <td>Kembali</td>
+            <td>Aksi</td>
+          </thead>
+          <?php foreach ($dataTrans as $trans) : ?>
+            <tbody>
+              <td><?= $trans['namapelanggan']; ?></td>
+              <td><?= $trans['namakaryawan']; ?></td>
+              <td><?= $trans['tgltransaksi']; ?></td>
+              <td><?= $trans['kategoripelanggan']; ?></td>
+              <td><?= number_format($trans['totalbayar'], 0, ',', '.'); ?></td>
+              <td><?= number_format($trans['bayar'], 0, ',', '.'); ?></td>
+              <td><?= number_format($trans['kembali'], 0, ',', '.'); ?></td>
+              <td class="btn">
+                <a href="transDelete.php?idtransaksi=<?= $trans['idtransaksi']; ?>" onclick="return confirm('Yakin ingin menghapus data ini?')"><button id="del">Hapus</button></a>
+                <a href="detailtransaksi.php?idtransaksi=<?= $trans['idtransaksi']; ?>"><button class="update">Detail</button></a>
+              </td>
+            </tbody>
+          <?php endforeach; ?>
+        </table>
+      </div>
 
   </main>
 

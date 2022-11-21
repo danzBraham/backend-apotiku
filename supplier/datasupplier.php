@@ -56,7 +56,6 @@ $dataSupp = query('SELECT * FROM tb_supplier');
   <title>Apotiku</title>
   <!-- Link CSS -->
   <link rel="stylesheet" href="../CSS/style.php">
-  <link rel="stylesheet" href="../CSS/print.php">
   <!-- Link Fontawesome -->
   <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
   <!-- Link Unicons -->
@@ -93,7 +92,7 @@ $dataSupp = query('SELECT * FROM tb_supplier');
         <button><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
       <div class="btn">
-        <button id="printBtn" onclick="print()"><i class="fa-solid fa-print"></i></button>
+        <button id="printBtn" onclick="window.print()"><i class="fa-solid fa-print"></i></button>
         <button id="tambahBtn">Tambah Data</button>
       </div>
     </div>

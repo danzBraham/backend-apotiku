@@ -89,7 +89,7 @@ $dataSupplier = query('SELECT idsupplier, perusahaan FROM tb_supplier');
         <button><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
       <div class="btn">
-        <button id="printBtn" onclick="print()"><i class="fa-solid fa-print"></i></button>
+        <button id="printBtn" onclick="window.print()"><i class="fa-solid fa-print"></i></button>
         <button id="tambahBtn">Tambah Data</button>
       </div>
     </div>

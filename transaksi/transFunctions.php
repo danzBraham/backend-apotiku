@@ -1,5 +1,4 @@
 <?php
-
 function connection() {
   return mysqli_connect('localhost', 'root', '', 'proyek_apotiku');
 }
@@ -21,8 +20,9 @@ function search($keyword) {
 
   $query = "SELECT * FROM tb_transaksi
             INNER JOIN tb_pelanggan USING(idpelanggan)
-            INNER JOIN tb_karyawan USING(idkaryawan)
-            WHERE namapelanggan LIKE '%$keyword%'";
+            INNER JOIN tb_karyawan USING(idkaryawan) WHERE
+            namapelanggan LIKE '%$keyword%' OR
+            tgltransaksi LIKE '%$keyword%'";
   $result = mysqli_query($conn, $query);
 
   $rows = [];
