@@ -2,6 +2,11 @@
 session_start();
 require 'suppFunctions.php';
 
+if (!isset($_SESSION['login'])) {
+  header("Location: ../index.php");
+  exit;
+}
+
 if ($_SESSION['level'] !== 'admin') {
   echo "<script>
           alert('Anda Karyawan!');
