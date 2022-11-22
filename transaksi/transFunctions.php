@@ -65,7 +65,7 @@ function member($data) {
   $idPel = $queryIdPel['idpelanggan'];
   $idKrywn = $_SESSION['idkaryawan'];
   $tglTrans = date('Y-m-d');
-  $kategori = 'member';
+  $kategori = 'Member';
 
   mysqli_query($conn, "INSERT INTO tb_transaksi VALUES (
     null, $idPel, $idKrywn, '$tglTrans', '$kategori', 0, 0, 0

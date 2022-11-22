@@ -54,7 +54,7 @@ $dataTrans = query('SELECT * FROM tb_transaksi INNER JOIN tb_pelanggan USING(idp
         <li><a href="../karyawan/datakaryawan.php"><i class="fa-solid fa-users"></i> <span>Table Karyawan</span> </a></li>
       <?php else : ?>
         <li><a href="../pelanggan/datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
-        <li><a href="datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
+        <li><a href="../transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
       <?php endif; ?>
     </nav>
   </header>
@@ -103,7 +103,7 @@ $dataTrans = query('SELECT * FROM tb_transaksi INNER JOIN tb_pelanggan USING(idp
               <label for="tanggal">Nama Pelanggan</label>
               <input type="text" list="namaPelanggan" name="namaPelanggan" id="tanggal">
               <datalist id="namaPelanggan">
-                <?php $dataPelanggan = query("SELECT namapelanggan FROM tb_pelanggan WHERE NOT namapelanggan = 'Belum menjadi member'"); ?>
+                <?php $dataPelanggan = query("SELECT namapelanggan FROM tb_pelanggan WHERE NOT namapelanggan = 'Bukan Member'"); ?>
                 <?php foreach ($dataPelanggan as $pel) : ?>
                   <option value="<?= $pel['namapelanggan']; ?>">
                   <?php endforeach; ?>

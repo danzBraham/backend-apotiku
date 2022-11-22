@@ -1,9 +1,9 @@
 <?php
 session_start();
-require './functions.php';
+require 'functions.php';
 
 if (isset($_SESSION['login'])) {
-  header("Location: ./dashboard.php");
+  header("Location: dashboard.php");
   exit;
 }
 
@@ -11,6 +11,7 @@ if (isset($_POST['login'])) {
   $login = login($_POST);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,12 +29,11 @@ if (isset($_POST['login'])) {
 <body>
   <!-- Login Page -->
   <section class="wrapper">
-  <?php if (isset($login['error'])) : ?>
-    <div class="pop-msg">
-      <!--Ini Pop Up kalo Salah Username atau Password-->
-      <p>Username atau Password Salah</p>
-      <a href="">Oke</a>
-    </div>
+    <?php if (isset($login['error'])) : ?>
+      <div class="pop-msg">
+        <p>Username atau Password Salah</p>
+        <a href="" id="btn-error">Oke</a>
+      </div>
     <?php endif; ?>
     <section class="login-page">
       <div class="input-container">

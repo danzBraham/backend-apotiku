@@ -6,41 +6,40 @@ if (!isset($_SESSION['login'])) {
   header("Location: index.php");
   exit;
 }
-
-if ($_SESSION['level'] !== 'admin') {
-  echo "<script>
-          document.location.href = 'dashkaryawan.php';
-        </script>";
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Apotiku</title>
   <!-- Link CSS -->
-  <link rel="stylesheet" href="CSS/style.php">
+  <link rel="stylesheet" href="CSS/style.php" />
   <!-- Link Fontawesome -->
   <script src="https://kit.fontawesome.com/1c6364f841.js" crossorigin="anonymous"></script>
   <!-- Link Unicons -->
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 
 <body>
   <!-- HEADER -->
   <header>
     <nav>
-      <h1 class="logo"><a href="#"><i class="uil uil-apps"></i></a></h1>
-      <li><a href=""><i class="fa-solid fa-home"></i> <span>Home</span> </a></li>
-      <li><a href="obat/dataobat.php"><i class="fa-solid fa-briefcase-medical"></i></i> <span>Table Obat</span> </a></li>
-      <li><a href="supplier/datasupplier.php"><i class="fa-solid fa-truck-medical"></i> <span>Table Supplier</span> </a></li>
-      <li><a href="pelanggan/datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
-      <li><a href="transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
-      <li><a href="karyawan/datakaryawan.php"><i class="fa-solid fa-users"></i> <span>Table Karyawan</span> </a></li>
+      <h1 class="logo">
+        <a href="#"><i class="uil uil-apps"></i></a>
+      </h1>
+      <li>
+        <a href="dashkaryawan.html"><i class="fa-solid fa-home"></i> <span>Home</span> </a>
+      </li>
+      <li>
+        <a href="datapelanggan.html"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a>
+      </li>
+      <li>
+        <a href="datatransaksi.html"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a>
+      </li>
     </nav>
   </header>
 
@@ -59,9 +58,8 @@ if ($_SESSION['level'] !== 'admin') {
         <img src="Assets/profilePict/<?= $dataUser['picture']; ?>" alt="Profile">
         <a id="profileBtn"><?= $dataUser['username']; ?> <i class="fa-solid fa-arrow-down"></i></a>
       </div>
-      <div id="profilePopup" class="profile-popup">
-        <a href="register.php"><i class="fa-solid fa-user-plus"></i> Tambah User</a>
-        <span></span>
+
+      <div id="profilePopup" class="profile-popup user">
         <a href="datauser.php?idkaryawan=<?= $dataUser['idkaryawan']; ?>"><i class="fa-solid fa-gear"></i> Pengaturan</a>
         <span></span>
         <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
@@ -72,12 +70,7 @@ if ($_SESSION['level'] !== 'admin') {
       <h3>Total Data</h3>
       <section class="dash-data">
         <section class="all-data">
-          <div class="total-data">
-            <div class="data">
-              <i class="fa-solid fa-pills"></i>
-              <?php $totalObat = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idobat) FROM tb_obat"))[0]; ?>
-              <p>Banyak Obat : <span><?= $totalObat; ?></span></p>
-            </div>
+          <div class="total-data --karyawan">
             <div class="data">
               <i class="fa-solid fa-user"></i>
               <?php $totalPel = mysqli_fetch_row(mysqli_query(connection(), "SELECT COUNT(idpelanggan) FROM tb_pelanggan"))[0]; ?>
@@ -121,19 +114,18 @@ if ($_SESSION['level'] !== 'admin') {
         </section>
 
         <section class="data-karyawan">
-          <h3>Data Karyawan</h3>
-          <?php $dataKywn = query("SELECT namakaryawan, telp FROM tb_karyawan LIMIT 2"); ?>
-          <?php foreach ($dataKywn as $kywn) : ?>
+          <h3>Data Pelanggan</h3>
+          <?php $dataPel = query("SELECT namapelanggan, alamat FROM tb_pelanggan ORDER BY idpelanggan DESC LIMIT 2"); ?>
+          <?php foreach ($dataPel as $pel) : ?>
             <div class="karyawan">
-              <img src="Assets/img/profile-karyawan.svg">
               <div class="name">
-                <p><?= $kywn['namakaryawan']; ?></p>
-                <p><?= $kywn['telp']; ?></p>
+                <p><?= $pel['namapelanggan']; ?></p>
+                <p><?= $pel['alamat']; ?></p>
               </div>
             </div>
           <?php endforeach; ?>
           <div class="btn">
-            <img src="Assets/img/img-karyawan.svg">
+            <img src="Assets/img/img-karyawan.svg" />
             <a href="karyawan/datakaryawan.php">Lihat Semua</a>
           </div>
         </section>

@@ -16,10 +16,12 @@ function query($query) {
 }
 
 function login($data) {
+  $conn = connection();
+
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
 
-  if ($user = query("SELECT * FROM tb_users WHERE username = '$username'")[0]) {
+  if ($user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tb_users WHERE username = '$username'"))) {
     if(password_verify($password, $user['password'])) {
       $_SESSION['login'] = true;
       $_SESSION['id'] = $user['id'];
