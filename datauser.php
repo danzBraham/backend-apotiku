@@ -62,8 +62,8 @@ $dataUser = query("SELECT * FROM tb_users WHERE idkaryawan = '$id'")[0];
         <input type="text" name="username" id="namaUser" value="<?= $dataUser['username']; ?>" />
       </div>
       <div class="btn">
-        <button type="submit" name="cancel">Batal</button>
-        <button type="submit" name="update" class="next-btn">Simpan</button>
+        <input type="submit" name="cancel" value="Batal">
+        <input type="submit" name="update" value="Simpan" class="next-btn">
       </div>
     </form>
   </main>
