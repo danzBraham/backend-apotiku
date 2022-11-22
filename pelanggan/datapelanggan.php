@@ -64,14 +64,15 @@ $dataPel = query('SELECT * FROM tb_pelanggan');
   <header>
     <nav>
       <h1 class="logo"><a href="#"><i class="uil uil-apps"></i></a></h1>
-      <li><a href="dashboard.html"><i class="fa-solid fa-home"></i> <span>Home</span> </a></li>
       <?php if (@$_SESSION['level'] === 'admin') : ?>
+        <li><a href="../dashboard.php"><i class="fa-solid fa-home"></i> <span>Home</span> </a></li>
         <li><a href="../obat/dataobat.php"><i class="fa-solid fa-briefcase-medical"></i></i> <span>Table Obat</span> </a></li>
         <li><a href="../supplier/datasupplier.php"><i class="fa-solid fa-truck-medical"></i> <span>Table Supplier</span> </a></li>
         <li><a href="datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
         <li><a href="../transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
         <li><a href="../karyawan/datakaryawan.php"><i class="fa-solid fa-users"></i> <span>Table Karyawan</span> </a></li>
       <?php else : ?>
+        <li><a href="../dashkaryawan.php"><i class="fa-solid fa-home"></i> <span>Home</span> </a></li>
         <li><a href="datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a></li>
         <li><a href="../transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a></li>
       <?php endif; ?>

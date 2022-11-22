@@ -32,13 +32,13 @@ if (!isset($_SESSION['login'])) {
         <a href="#"><i class="uil uil-apps"></i></a>
       </h1>
       <li>
-        <a href="dashkaryawan.html"><i class="fa-solid fa-home"></i> <span>Home</span> </a>
+        <a href="dashkaryawan.php"><i class="fa-solid fa-home"></i> <span>Home</span> </a>
       </li>
       <li>
-        <a href="datapelanggan.html"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a>
+        <a href="pelanggan/datapelanggan.php"><i class="fa-solid fa-hospital-user"></i> <span>Table Pelanggan</span> </a>
       </li>
       <li>
-        <a href="datatransaksi.html"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a>
+        <a href="transaksi/datatransaksi.php"><i class="fa-solid fa-comment-dollar"></i> <span>Table Transaksi</span> </a>
       </li>
     </nav>
   </header>
