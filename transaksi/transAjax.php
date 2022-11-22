@@ -1,5 +1,5 @@
 <?php
-require 'transFunctions.php';
+require 'transFunctions.php'; 
 $dataTrans = search($_GET['keyword']);
 ?>
 
