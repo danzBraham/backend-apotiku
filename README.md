@@ -8,3 +8,6 @@ A Collaboration With:
   
 - Zidan Abraham (Backend Developer) <br>
   https://github.com/danzBraham
+
+- Rizky Ryan Sahadha (Frontend Developer) <br>
+  https://github.com/Mezzky
